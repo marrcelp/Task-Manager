@@ -184,10 +184,12 @@ class TasksManager extends React.Component {
                     .map((task)=> {
                         return(
                         <li className='task__element' style={{ display: task.isRemoved ? 'none' : 'block' }}>
-                            <header className='task__header'>{task.name} {this.formatTime(task.time)}</header>
+                            <header className='task__header'>{task.name}</header>
+                            <p className='task__timer'>{this.formatTime(task.time)}</p>
                             <button className='task__btn' onClick={() => task.isRunning? this.stopTime(task.id) : this.incrementTime(task.id)}>{task.isRunning ? 'Stop' : 'Start'}</button>
                             <button className='task__btn' onClick={() => this.finishTask(task.id)}>zakończone</button>
                             <button className='task__btn' onClick={() => this.removeTask(task.id)} disabled={!task.isDone}>usuń</button>
+                            <span className="material-symbols-outlined" style={{ display: task.isDone ? 'inline-block' : 'none' }}>check</span>
                         </li>
                         )
                     })}

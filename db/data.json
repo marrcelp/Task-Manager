@@ -1,15 +1,15 @@
 {
   "data": [
     {
-      "name": "zadanie1",
-      "time": 22,
+      "name": "test1",
+      "time": 11,
       "isRunning": false,
       "isDone": true,
       "isRemoved": true,
       "id": 1
     },
     {
-      "name": "zad2",
+      "name": "zadanie",
       "time": 0,
       "isRunning": false,
       "isDone": false,
@@ -17,15 +17,15 @@
       "id": 2
     },
     {
-      "name": "test",
-      "time": 11,
+      "name": "test2",
+      "time": 0,
       "isRunning": false,
       "isDone": false,
       "isRemoved": false,
       "id": 3
     },
     {
-      "name": "test2",
+      "name": "testowy task nr 4",
       "time": 0,
       "isRunning": false,
       "isDone": false,
