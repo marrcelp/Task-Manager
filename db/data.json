@@ -2,131 +2,35 @@
   "data": [
     {
       "name": "zadanie1",
-      "time": 76,
+      "time": 22,
       "isRunning": false,
       "isDone": true,
       "isRemoved": true,
+      "id": 1
+    },
+    {
+      "name": "zad2",
+      "time": 0,
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
       "id": 2
     },
     {
-      "name": "zadanie2",
-      "time": 61,
+      "name": "test",
+      "time": 11,
       "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
+      "isDone": false,
+      "isRemoved": false,
       "id": 3
     },
     {
-      "name": "zad3",
-      "time": 10,
+      "name": "test2",
+      "time": 0,
       "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
+      "isDone": false,
+      "isRemoved": false,
       "id": 4
-    },
-    {
-      "name": "z",
-      "time": 3,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 5
-    },
-    {
-      "name": "test",
-      "time": 0,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 6
-    },
-    {
-      "name": "test111",
-      "time": 2,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 7
-    },
-    {
-      "name": "test22",
-      "time": 3,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 8
-    },
-    {
-      "name": "test33",
-      "time": 0,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 9
-    },
-    {
-      "name": "test44",
-      "time": 0,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 10
-    },
-    {
-      "name": "etetetes555",
-      "time": 0,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 11
-    },
-    {
-      "name": "zadanie 1 ",
-      "time": 108,
-      "isRunning": false,
-      "isDone": true,
-      "isRemoved": true,
-      "id": 12
-    },
-    {
-      "name": "zadan 2",
-      "time": 0,
-      "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
-      "id": 13
-    },
-    {
-      "name": "zad 3 ",
-      "time": 87,
-      "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
-      "id": 14
-    },
-    {
-      "name": "44",
-      "time": 0,
-      "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
-      "id": 15
-    },
-    {
-      "name": "5",
-      "time": 0,
-      "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
-      "id": 16
-    },
-    {
-      "name": "6",
-      "time": 0,
-      "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
-      "id": 17
     }
   ]
 }

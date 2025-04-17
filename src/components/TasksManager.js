@@ -169,9 +169,9 @@ class TasksManager extends React.Component {
     render() {
         const { taskName, tasks } = this.state;
         return (
-            <>
+            <div className='task'>
             <section className='task__top'>
-                <h1 onClick={ this.onClick }>TasksManager</h1>
+                <h1 className='task__title' onClick={ this.onClick }>TasksManager</h1>
                 <form className='task__form' onSubmit={this.submitHandler}>
                     <input name='taskName' value={ taskName } onChange={ this.inputChange } className='task__name' type='text' placeholder='Task name'></input>
                     <button className='task__button' type='submit'>Add task</button>
@@ -184,7 +184,7 @@ class TasksManager extends React.Component {
                     .map((task)=> {
                         return(
                         <li className='task__element' style={{ display: task.isRemoved ? 'none' : 'block' }}>
-                            <header className='task__header'>{task.name}, {this.formatTime(task.time)}</header>
+                            <header className='task__header'>{task.name} {this.formatTime(task.time)}</header>
                             <button className='task__btn' onClick={() => task.isRunning? this.stopTime(task.id) : this.incrementTime(task.id)}>{task.isRunning ? 'Stop' : 'Start'}</button>
                             <button className='task__btn' onClick={() => this.finishTask(task.id)}>zakończone</button>
                             <button className='task__btn' onClick={() => this.removeTask(task.id)} disabled={!task.isDone}>usuń</button>
@@ -193,7 +193,7 @@ class TasksManager extends React.Component {
                     })}
                 </ul>
             </section>
-            </>
+            </div>
         )
     }
 }
