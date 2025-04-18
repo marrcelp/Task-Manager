@@ -1,15 +1,15 @@
 {
   "data": [
     {
-      "name": "test1",
-      "time": 11,
+      "name": "zadanie1",
+      "time": 8,
       "isRunning": false,
       "isDone": true,
-      "isRemoved": true,
+      "isRemoved": false,
       "id": 1
     },
     {
-      "name": "zadanie",
+      "name": "zad2",
       "time": 0,
       "isRunning": false,
       "isDone": false,
@@ -17,7 +17,7 @@
       "id": 2
     },
     {
-      "name": "test2",
+      "name": "test3",
       "time": 0,
       "isRunning": false,
       "isDone": false,
@@ -25,12 +25,20 @@
       "id": 3
     },
     {
-      "name": "testowy task nr 4",
+      "name": "test4",
       "time": 0,
       "isRunning": false,
       "isDone": false,
       "isRemoved": false,
       "id": 4
+    },
+    {
+      "name": "zad5",
+      "time": 0,
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 5
     }
   ]
 }

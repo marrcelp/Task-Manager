@@ -1,13 +1,14 @@
 import React from "react";
 
-export function sendTask(url, data) {
+function actionTask(url, method, data='', id = ''){
+
     const options = {
-        method: 'POST',
+        method: method,
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
     }
 
-    const promise = fetch(url, options)
+    const promise = fetch(`${url}/${id}`, options);
 
     return promise
         .then((resp) => {
@@ -18,16 +19,24 @@ export function sendTask(url, data) {
                 return Promise.reject('Bad query to API')
             }
             return Promise.reject(resp);
-        })
-
-        .then((task) => {
-            return task
+            
         })
 
         .catch(err => console.error(err))
-        .finally(() => console.log('Zakonczono odpytywanie do API'));
-
 }
+
+export function sendTask(url, data){
+    return actionTask(url, 'POST', data)
+        .then((task) => {
+            return task
+        })
+        .finally(() => console.log('Zakonczono odpytywanie do API'));
+}
+
+export function updateTask(url, id, data){
+    return actionTask(url, 'PATCH', data, id)
+}
+
 
 export function fetchTask(url){
 
@@ -52,30 +61,3 @@ export function fetchTask(url){
         .finally(() => console.log('Zakonczono odpytywanie do API'));
 
 }
-
-export function updateTask(url, id, updatedData){
-    const promise = fetch(`${url}/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(updatedData),
-        headers: { 'Content-Type': 'application/json' },
-    })
-
-    return promise 
-        .then((resp) => {
-            if (resp.ok){
-                return resp.json();
-            }
-            if (resp.status === 400){
-                return Promise.reject('Bad query to API')
-            }
-            return Promise.reject(resp);
-            
-        })
-    
-        .catch(err => console.error(err))
-        // .finally(() => console.log('Zakonczono wysylanie danych do API'));
-
-    
-}
-
-
