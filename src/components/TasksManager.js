@@ -180,15 +180,18 @@ class TasksManager extends React.Component {
             <section className='task__bottom'>
                 <ul className='task__list'>
                     {tasks
+                    .filter((task) => !task.isRemoved)
                     .sort((a, b) => a.isDone - b.isDone)
                     .map((task)=> {
                         return(
-                        <li className='task__element' style={{ display: task.isRemoved ? 'none' : 'block' }}>
+                        <li className='task__element' >
                             <header className='task__header'>{task.name}</header>
                             <p className='task__timer'>{this.formatTime(task.time)}</p>
+                            <div className='btn__container'>
                             <button className='task__btn' onClick={() => task.isRunning? this.stopTime(task.id) : this.incrementTime(task.id)}>{task.isRunning ? 'Stop' : 'Start'}</button>
                             <button className='task__btn' onClick={() => this.finishTask(task.id)}>zakończone</button>
                             <button className='task__btn' onClick={() => this.removeTask(task.id)} disabled={!task.isDone}>usuń</button>
+                            </div>
                             <span className="material-symbols-outlined" style={{ display: task.isDone ? 'inline-block' : 'none' }}>check</span>
                         </li>
                         )

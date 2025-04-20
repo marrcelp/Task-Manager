@@ -2,14 +2,14 @@
   "data": [
     {
       "name": "zadanie1",
-      "time": 8,
+      "time": 28,
       "isRunning": false,
-      "isDone": true,
+      "isDone": false,
       "isRemoved": false,
       "id": 1
     },
     {
-      "name": "zad2",
+      "name": "test2",
       "time": 0,
       "isRunning": false,
       "isDone": false,
@@ -28,16 +28,16 @@
       "name": "test4",
       "time": 0,
       "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
+      "isDone": true,
+      "isRemoved": true,
       "id": 4
     },
     {
-      "name": "zad5",
-      "time": 0,
+      "name": "cos tam do z",
+      "time": 4,
       "isRunning": false,
-      "isDone": false,
-      "isRemoved": false,
+      "isDone": true,
+      "isRemoved": true,
       "id": 5
     }
   ]
