@@ -1,7 +1,7 @@
 import React from 'react';
 import { sendTask, fetchTask, updateTask } from './tasksProvider';
 // const url = 'http://localhost:3005/data';
-const url = 'http://13.60.90.67:3001/data';
+const url = 'http://13.60.90.67:4000/data';
 
 
 class TasksManager extends React.Component {
