@@ -4,7 +4,7 @@
 
 See the live version of this project:
 
-- 🕒 [User interface](https://marrcelp.github.io/TasksManager)
+- 🕒 [User interface](https://marrcelp.github.io/Task-Manager/)
 
 The goal of this project is to create a simple but functional task timer app that demonstrates interaction with a REST API. Users can add tasks, track the time spent on them, and mark tasks as completed or removed. All operations are persisted via a backend API.
 
