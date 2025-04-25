@@ -121,10 +121,13 @@ Currently, the app tracks the **total time** spent on a task, but it doesn’t s
 - Saving the **exact date** and **time range** (start → stop) for each session a task is running.
 - Creating a **list of time entries** for each task – so users can view the full history of when a task was worked on.
 
-Example:
+**Example:**
+
+```text
 ✅ Task: "Write blog post"
 ▶ 2025-04-24 | 14:03 – 14:45
 ▶ 2025-04-25 | 09:00 – 09:25
+```
 
 This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
 
