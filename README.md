@@ -114,7 +114,7 @@ formatTime = (totalSeconds) => {
 
 In future versions of the **TasksManager**, I would like to enhance the app with the following features:
 
-### 📅 Task Date & Time History
+#### 📅 Task Date & Time History
 
 Currently, the app tracks the **total time** spent on a task, but it doesn’t store **when** the task was performed. I want to implement:
 
@@ -129,7 +129,7 @@ Currently, the app tracks the **total time** spent on a task, but it doesn’t s
 ▶ 2025-04-25 | 09:00 – 09:25
 ```
 
-This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
+This will make the app more useful for time reporting and personal productivity.
 
 ---
 
