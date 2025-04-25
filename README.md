@@ -1,4 +1,4 @@
-![demo gif](./src/assets/demo-task2.gif)
+![demo gif](./src/styles/assets/demo-task2.gif)
 
 # TasksManager – Your Personal Task Timer
 
