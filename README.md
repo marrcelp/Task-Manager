@@ -19,6 +19,22 @@ Each task has a built-in stopwatch, which can be started and stopped manually. O
 
 ---
 
+## ❗️ First-time setup notice
+
+For security reasons, the API is hosted with a **self-signed HTTPS certificate**.  
+Before using the app for the first time, you need to manually visit the API link and confirm your browser's security exception:
+
+🔗 https://13.60.90.67
+
+Steps:
+
+1. Open the link above in your browser.
+2. Click **“Advanced”** → **“Proceed to 13.60.90.67 (unsafe)”**.
+3. Return to the app – it will now be able to fetch data from the API correctly.
+
+> ✅ This only needs to be done **once per browser**.
+
+
 ## 💡 Technologies
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -42,13 +58,12 @@ npm start
 ```
 Then open:
 
-- `http://localhost:3000` to view the app in the browser.
+- `http://localhost:4000` to view the app in the browser.
 
 API is hosted on a self-configured AWS server and available at:
 
 🔗 `https://13.60.90.67/data`
 
-> ⚠️ **Important:** Since the API uses a self-signed certificate, you may need to open the API URL directly in your browser, click “Advanced” → “Proceed”, and accept the exception **once per browser** to avoid CORS/HTTPS issues.
 
 ---
 
