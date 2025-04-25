@@ -1,167 +1,110 @@
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+![demo gif](./src/assets/demo-tasktimer.gif)
 
-&nbsp;
+# TasksManager – Your Personal Task Timer
 
+See the live version of this project:
 
-# TasksManager
+- 🕒 [User interface](https://marrcelp.github.io/TasksManager)
 
-## Wprowadzenie
+The goal of this project is to create a simple but functional task timer app that demonstrates interaction with a REST API. Users can add tasks, track the time spent on them, and mark tasks as completed or removed. All operations are persisted via a backend API.
 
-Tym razem stworzymy jeden komponent, który będzie zarządzał naszymi zadaniami.
+Each task has a built-in stopwatch, which can be started and stopped manually. Once a task is marked as done, it becomes eligible for deletion from the UI. However, all tasks (including removed ones) are still stored in the backend for future reference.
 
-Będzie to rozwiązanie, które pozwoli tworzyć zadania i liczyć czas ich wykonania.
+**Main features**:
+- Adding new tasks with a custom name.
+- Tracking time for each task individually with start/stop buttons.
+- Marking tasks as completed (displays a green tick).
+- Removing completed tasks from the list (but not from the database).
+- Persisting all task data to an external API (`https://13.60.90.67/data`).
 
-## Implementacja
+---
 
-### Dodawanie zadań
+## 💡 Technologies
 
-Należy stworzyć formularz, który pozwoli na dodawanie nowych zadań. Ma to być komponent kontrolowany – do pól formularza muszą być przypisane wartości ze state (`<input name="task" value={ this.state.task } onChange={ ... } />`) i obsługa zdarzenia `onChange`.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![REST API](https://img.shields.io/badge/REST%20API-%23000000.svg?style=for-the-badge&logo=api&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
-Potwierdzenie formularza (`onSubmit`) ma skutkować wysłaniem zadania do lokalnego API stworzonego przy pomocy [json-servera](https://github.com/typicode/json-server). Po dodaniu zadania otrzymujemy odpowiedź od serwera – jest to ID nowo utworzonego elementu.
+---
 
-Dopiero teraz możemy dodać to zadanie do naszej listy (`this.state.tasks`). Pamiętaj, aby za każdym razem, kiedy dodajesz nowy element, tworzyć kopię poprzedniej tablicy:
-```js
-const newItem = {
-    name: 'Zadanie 1',
-    // ... 
-};
+## 💿 Installation
 
-this.setState(state => {
-    return {
-        tasks: [...state.tasks, newItem],
-    }
-});
+The project uses [npm](https://www.npmjs.com/). To install it, type into the terminal:
+
+```bash
+npm install
 ```
-### Dane pojedynczego zadania
+To run the project locally:
 
-Każde z zadań powinno posiadać:
-- nazwę (`name`)
-- ID (`id`), które jest zwracane przez API
-- czas jego wykonywania w sekundach (`time`)
-- informację, czy czas jest odliczany w danym momencie (`isRunning`)
-- czy zadanie zostało już wykonane (`isDone`)
-- czy zostało usunięte (`isRemoved`).
+```bash
+npm start
+```
+Then open:
 
-### Funkcjonalności
+- `http://localhost:3000` to view the app in the browser.
 
-W każdym zadaniu powinniśmy mieć możliwość:
-- rozpoczęcia odliczania
-- zatrzymania odliczania, jeśli zostało wcześniej rozpoczęte
-- zakończenia zadania, co spowoduje przeniesienie go na koniec listy (można wykorzystać [.sort()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/sort))
-- usunięcia z listy, co spowoduje, że zadanie nie zostanie wyrenderowane, ale będzie cały czas przechowywane w state (można wykorzystać [.filter()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/filter)).
+API is hosted on a self-configured AWS server and available at:
 
-Uznajemy, że w jednym momencie możemy wykonywać jedno zadanie.
+🔗 `https://13.60.90.67/data`
 
-Wciśnięcie przycisku `zakończone` powinno jednocześnie zatrzymywać naliczanie czasu.
+> ⚠️ **Important:** Since the API uses a self-signed certificate, you may need to open the API URL directly in your browser, click “Advanced” → “Proceed”, and accept the exception **once per browser** to avoid CORS/HTTPS issues.
 
-Usunięcie zadania ma być możliwe dopiero po jego zakończeniu (uznajemy, że nie ma omyłkowo dodanych zadań).
+---
 
-Każda zmiana danych zadania (odliczanie, wstrzymanie, zakończenie itp.) powinna być zapisywana w API.
+## 🔧 Core functionality
 
-Pamiętaj również, że zmiana w `state` musi odbywać się przez utworzenie kopii obiektu i dopiero potem jego aktualizację, np.
+| Feature               | Implementation                                    | Code Snippet                           |
+|-----------------------|----------------------------------------------------|----------------------------------------|
+| Add a task            | Using form and POST request to the API            | `sendTask(url, newTask)`               |
+| Track time with timer | `setInterval` updates time every second           | `this.timer = setInterval(...)`        |
+| Mark task as done     | PATCH with `isDone: true`                         | `updateTask(url, id, { isDone: true })`|
+| Remove task           | PATCH with `isRemoved: true`                      | `updateTask(url, id, { isRemoved: true })`|
+
+### ⏱ Time formatting
+
+Each task's time is displayed in `hh:mm:ss` format. Example output: `00:10:32`
 
 ```js
-incrementTime(id) {
-    this.setState(state => {
-        const newTasks = state.tasks.map(task => {
-            if(task.id === id) {
-                return {...task, time: task.time + 1}
-            }
-
-            return task;
-        });
-
-        return {
-            tasks: newTasks,
-        }
-    });
+formatTime = (totalSeconds) => {
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+  const seconds = String(totalSeconds % 60).padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
 }
 ```
+## 🔮 Future Improvements
 
-Każde zadanie powinno mieć strukturę zbliżoną do tej poniżej. Pamiętaj, że część przycisków musi się zachowywać zgodnie z obecnym stanem aplikacji (np. w pewnym momencie być nieaktywna).
-```html
-<section>
-    <header>Zadanie 1, 00:00:00</header>
-    <footer>
-        <button>start/stop</button>
-        <button>zakończone</button>
-        <button disabled="true">usuń</button>
-    </footer>
-</section>
-```
+In future versions of the **TasksManager**, I would like to enhance the app with the following features:
 
-Powyższa struktura powinna być generowana na podstawie danych z wartości `this.state.tasks` oraz przy pomocy [.map()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/map).
+### 📅 Task Date & Time History
 
-### Uwaga
+Currently, the app tracks the **total time** spent on a task, but it doesn’t store **when** the task was performed. I want to implement:
 
-Na razie nie dziel swojego komponentu na mniejsze części, ponieważ niepotrzebnie skomplikuje to implementację.
+- Saving the **exact date** and **time range** (start → stop) for each session a task is running.
+- Creating a **list of time entries** for each task – so users can view the full history of when a task was worked on.
 
-W następnym materiale poznasz techniki, które Ci w takim podziale pomogą i pozwolą odpowiednio przekazywać dane pomiędzy komponentami. 
+Example:
+✅ Task: "Write blog post"
+▶ 2025-04-24 | 14:03 – 14:45
+▶ 2025-04-25 | 09:00 – 09:25
 
-### CSS
-
-Do konfiguracji webpacka (w pliku `webpack.config.js`) dodano obsługę plików CSS, dlatego możesz odpowiednio ostylować swoje rozwiązanie, wykorzystując klasy i metodologię [BEM](https://devmentor.pl/b/metodologia-bem-w-css-i-sass).
-
-Zauważ, że w `./src/app.js` importowany jest plik CSS. Dzięki temu rozwiązaniu webpack pobierze zawartość tego pliku i do `index.html` doda CSS jako znacznik `<style/>` w `<head/>`.
-
-#### Dodatkowe zasoby w CSS-ie
-
-Aby webpack odpowiednio czytał zdjęcia lub fonty w CSS-ie, należy zmodyfikować konfigurację.
-
-Możesz to uznać za zadanie dodatkowe lub poczekać na omówienie tego tematu w kolejnych materiałach.
-
-### JSON Server – przypomnienie
-
-Paczka `json-server` powinna być zainstalowana globalnie, dlatego warto mieć uprawnienia administratora (sudo na Linuksie), aby móc to zrobić.
-
-W terminalu wpisz komendę:
-
-```
-npm install -g json-server@0.17
-```
-
-Po instalacji powinieneś mieć dostęp do informacji o zainstalowanej wersji:
-
-```
-json-server -v
-```
-
-Teraz w katalogu głównym naszej aplikacji utwórz katalog `db`, a w nim plik `data.json` i wrzuć do niego testowe dane, np.:
-
-```javascript
-{
-    "data": [
-        {
-            "id": 1,
-            "firstName": "Jan",
-            "lastName": "Kowalski"
-        }
-    ]
-}
-```
-
-Jeśli masz już uruchomionego webpacka (`npm start`), to w kolejnym terminalu (wierszu poleceń) uruchom API:
-
-```
-json-server --watch ./db/data.json --port 3005
-```
-
-Ustawiamy inny port niż domyślny (3000), aby być pewnym, że nic go nie blokuje.
-
-Od teraz możesz korzystać z API pod adresem:
-
-```
-http://localhost:3005/data
-```
-
-> **Uwaga!** Jeśli API ma działać, json-server zawsze musi być uruchomiony. 
+This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
 
 
+This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
 
-&nbsp;
+---
 
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+## 🙋‍♂️ Feel free to contact me
+
+Write sth nice ;) Find me on:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/marcel-piaszczyk-200ba8181/)
+[![Gmail](https://img.shields.io/badge/Gmail-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:marcel.piaszczyk@gmail.com)
+
+---
+
+## 👏 Special thanks
+
+Thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) – for support and code review.
