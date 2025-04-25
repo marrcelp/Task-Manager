@@ -60,10 +60,32 @@ Then open:
 
 - `http://localhost:4000` to view the app in the browser.
 
-API is hosted on a self-configured AWS server and available at:
+To start the backend, you don't need to run anything locally. The API is already live and running on a server I configured myself on AWS using json-server. It is served over HTTPS with a self-signed certificate using Nginx as a reverse proxy.
+
+API endpoints:
 
 🔗 `https://13.60.90.67/data`
 
+## 🛠️ AWS Server Configuration (short overview)
+
+I manually set up an **Ubuntu-based EC2 instance on AWS** to host the API for this project.
+
+After configuring the firewall and opening the necessary ports (4000 for the app and 443 for HTTPS), I:
+
+- Installed **Node.js** on the server.
+- Globally installed **json-server** for quick REST API setup.
+- Created a `data.json` file to store the task data.
+- Used **PM2** to run the json-server process in the background and keep it alive after reboots.
+
+The API runs on port `4000`, and I configured **Nginx as a reverse proxy** to expose it securely via HTTPS on port `443`.
+
+### 👇 Example PM2 setup command:
+
+```bash
+pm2 start json-server --name tasks-api -- \
+  --watch /home/ubuntu/tasksmanager/data.json --port 4000
+pm2 save
+```
 
 ---
 
@@ -103,9 +125,6 @@ Example:
 ✅ Task: "Write blog post"
 ▶ 2025-04-24 | 14:03 – 14:45
 ▶ 2025-04-25 | 09:00 – 09:25
-
-This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
-
 
 This will make the app more useful for time reporting, personal productivity, and even billing if used professionally.
 
